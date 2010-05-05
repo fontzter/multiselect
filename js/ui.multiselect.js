@@ -141,13 +141,15 @@ $.widget("ui.multiselect", {
 		this.container.find(".add-all").bind('click.multiselect', function() { that.selectAll(); return false; });
 
 		// set dimensions
-		this.container.width(this.element.width()+1);
+		var elW = this.element.is(":visible") ? this.element.width() : parseInt(this.element.css("width"));
+		var elH = this.element.is(":visible") ? this.element.height() : parseInt(this.element.css("height"));
+		this.container.width(elW+1);
 		this._refreshDividerLocation();
 		// set max width of search input dynamically
 		this.availableActions.find('input').width(Math.max(this.availableActions.width() - this.availableActions.find('a.add-all').width() - 30, 20));
 		// fix list height to match <option> depending on their individual header's heights
-		this.selectedList.height(Math.max(this.element.height()-this.selectedActions.height(),1));
-		this.availableList.height(Math.max(this.element.height()-this.availableActions.height(),1));
+		this.selectedList.height(Math.max(elH-this.selectedActions.height(),1));
+		this.availableList.height(Math.max(elH-this.availableActions.height(),1));
 
 		// init lists
 		this._populateLists(this.element.find('option'));
