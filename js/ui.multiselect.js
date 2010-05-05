@@ -306,8 +306,9 @@ $.widget("ui.multiselect", {
 	},
 
 	_refreshDividerLocation: function() {
-		this.selectedContainer.width(Math.floor(this.element.width()*this.options.dividerLocation));
-		this.availableContainer.width(Math.floor(this.element.width()*(1-this.options.dividerLocation)));
+		var elW = this.element.is(":visible") ? this.element.width() : parseInt(this.element.css("width"));
+		this.selectedContainer.width(Math.floor(elW*this.options.dividerLocation));
+		this.availableContainer.width(Math.floor(elW*(1-this.options.dividerLocation)));
 	},	
 	_prepareLists: function(side, otherSide, opts) {
 		var that = this;
